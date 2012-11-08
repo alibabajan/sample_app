@@ -15,6 +15,8 @@ class User < ActiveRecord::Base
 	#a Rails method: As long as there is a password_digest column 
 	#in the database, adding this one method to our model gives us
 	# a secure way to create and authenticate new users.
+	# this will encrypt the password saved to the database and provides
+	# authenticate() method to the user object
 	has_secure_password
 
     #field value presence and length validations
