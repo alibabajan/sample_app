@@ -10,6 +10,10 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
+//The dropdown menu requires the use of Bootstrap’s JavaScript library, 
+//which we can include using the Rails asset pipeline = require bootstrap
+//
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap
 //= require_tree .

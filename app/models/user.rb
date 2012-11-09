@@ -30,5 +30,13 @@ class User < ActiveRecord::Base
 #callback to force Rails to downcase 
 #the email attribute before saving the user to the database
 #to ensure uniqueness
-before_save { |user| user.email = email.downcase }	 		  						
+before_save { |user| user.email = email.downcase }	
+before_save :create_remember_token 	
+
+private
+
+    def create_remember_token
+    	#generate a secure random token to be used by session
+      self.remember_token = SecureRandom.urlsafe_base64
+    end	  						
 end

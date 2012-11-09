@@ -4,6 +4,7 @@ SampleApp::Application.routes.draw do
  #for REST resources. ex it ensures that a POST request to
  # /users is handled by the create action
   resources :users
+  resources :sessions, only: [:new, :create, :destroy]
 
  root to: 'static_pages#home'
 
@@ -12,6 +13,10 @@ SampleApp::Application.routes.draw do
   match '/contact', to: 'static_pages#contact'
 
   match '/signup', to: 'users#new'
+  match '/signin',  to: 'sessions#new'
+  match '/signout', to: 'sessions#destroy', via: :delete  
+  #via: :delete  indicates that it should be invoked using an HTTP DELETE request.
+
   #matches /contact and routes it to the contact action in the 
   #staticpages controller. this will also create named routes for
   #use in the controller and views:
