@@ -29,10 +29,22 @@ describe User do
   it { should respond_to(:authenticate) }
   it { should respond_to(:remember_token) }
 
+  it { should respond_to(:admin) }
+
   #validation tests
 
   #verifying that the @user object is initially valid
   it { should be_valid }
+  it { should_not be_admin }   
+
+describe "with admin attribute set to 'true'" do
+    before do
+      @user.save!
+      @user.toggle!(:admin)
+    end
+    it { should be_admin }
+  end
+  #toggle! method to flip the admin attribute from false to true
 
 #verify that validation exists to check presence of values for the fields
   describe "when name is not present" do

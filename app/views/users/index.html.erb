@@ -1,0 +1,15 @@
+<% provide(:title, 'All users') %>
+<h1>All users</h1>
+
+<%= will_paginate %>
+
+<ul class="users">
+  <%= render @users %>
+</ul>
+
+<%= will_paginate %>
+<!-- it automatically looks for an @users object, and then displays pagination links to access other pages -->
+
+<!--  Rails infers that @users is a list of User objects -->
+ 
+    <!-- with render Rails automatically looks for a partial called _user.html.erb -->
