@@ -5,6 +5,7 @@ SampleApp::Application.routes.draw do
  # /users is handled by the create action
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
+  resources :microposts, only: [:create, :destroy]
 
  root to: 'static_pages#home'
 
@@ -12,7 +13,7 @@ SampleApp::Application.routes.draw do
   match '/about',   to: 'static_pages#about'
   match '/contact', to: 'static_pages#contact'
 
-  match '/signup', to: 'users#new'
+  match '/signup',  to: 'users#new'
   match '/signin',  to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete  
   #via: :delete  indicates that it should be invoked using an HTTP DELETE request.

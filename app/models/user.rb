@@ -18,6 +18,8 @@ class User < ActiveRecord::Base
 	# this will encrypt the password saved to the database and provides
 	# authenticate() method to the user object
 	has_secure_password
+	has_many :microposts, dependent: :destroy
+	# dependent: :destroy -> Ensuring that a user’s microposts are destroyed along with the user. 
 
     #field value presence and length validations
 	validates :name, presence: true, length: { maximum: 50 }
@@ -27,11 +29,16 @@ class User < ActiveRecord::Base
 	validates :password, presence: true, length: { minimum: 6 }	 
 	validates :password_confirmation, presence: true		  						
 
-#callback to force Rails to downcase 
-#the email attribute before saving the user to the database
-#to ensure uniqueness
-before_save { |user| user.email = email.downcase }	
-before_save :create_remember_token 	
+	#callback to force Rails to downcase 
+	#the email attribute before saving the user to the database
+	#to ensure uniqueness
+	before_save { |user| user.email = email.downcase }	
+	before_save :create_remember_token 	
+
+	def feed
+	    # This is preliminary. See "Following users" for the full implementation.
+	    Micropost.where("user_id = ?", id)
+	end
 
 private
 
