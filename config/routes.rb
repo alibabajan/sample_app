@@ -3,9 +3,14 @@ SampleApp::Application.routes.draw do
  #this adds  a working /users/1 URI and all the actions
  #for REST resources. ex it ensures that a POST request to
  # /users is handled by the create action
-  resources :users
+  resources :users do
+    member do
+      get :following, :followers
+    end
+  end
   resources :sessions, only: [:new, :create, :destroy]
   resources :microposts, only: [:create, :destroy]
+  resources :relationships, only: [:create, :destroy]
 
  root to: 'static_pages#home'
 
